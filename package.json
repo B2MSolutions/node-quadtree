@@ -1,0 +1,28 @@
+{ 
+  "name": "quadtree",
+	"description": "geospatial quadtree encoding and decoding.",
+	"version": "0.0.1",
+  "licenses": [{
+    "type": "MIT",
+    "url": "https://github.com/B2MSolutions/node-quadtree/raw/master/LICENSE"
+  }],
+  "author": { "name": "B2M Solutions", "url": "https://github.com/B2MSolutions" },
+  "contributors": [
+    { "name": "Roy Lines", "url":"https://github.com/roylines" },
+    { "name": "James Bloomer", "url":"https://github.com/jamesbloomer" }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/B2MSolutions/node-quadtree.git" 
+  },
+  "keywords": ["quadtree", "geo", "geospatial", "map"],
+	"dependencies": {
+  },
+  "devDependencies" : {
+		"sinon" : "x.x.x",
+		"mocha" : "x.x.x"
+	},
+  "main": "./lib/quadtree",
+  "scripts": { "test": "mocha test/*_test.js --reporter spec" },
+  "engines": { "node": ">= 0.6.0" }
+}
