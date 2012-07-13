@@ -1,7 +1,7 @@
 { 
   "name": "quadtree",
 	"description": "geospatial quadtree encoding and decoding.",
-	"version": "0.0.1",
+	"version": "1.0",
   "licenses": [{
     "type": "MIT",
     "url": "https://github.com/B2MSolutions/node-quadtree/raw/master/LICENSE"
