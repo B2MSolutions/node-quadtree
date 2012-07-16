@@ -14,13 +14,15 @@ The encoding algorithm orders the tiles using the [bing maps ordering](http://ms
 
 	var coordinate = {
 		lng: -27.093364,
-		lat: -109.367523 
+		lat: -109.367523
 	};
 
 	var precision = 8;
 	var encoded = quadtree.encode(coordinate, precision);
 
 	var decoded = quadtree.decode(encoded);
+
+	var boundingBox = quadtree.bbox(decoded.origin);
 
 ## Contributors
 Pair programmed by [Roy Lines](http://roylines.co.uk) and [James Bloomer](https://github.com/jamesbloomer).
