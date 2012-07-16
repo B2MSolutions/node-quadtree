@@ -52,4 +52,23 @@ describe('quadtree', function(){
       assert.deepEqual(quadtree.bbox('3'), { minlng: 0.0, minlat: -90.0, maxlng: 180.0, maxlat: 0.0 });
     });
   });
+
+  describe('#neighbour()', function(){
+    it('should return expected for given quadtree precision 12', function(){
+      assert.deepEqual(quadtree.neighbour('1310333011320', 0, 1), '1310333011321');
+    });
+    it('should return expected for given quadtree precision 1 and quadrant 0', function(){
+      assert.equal(quadtree.neighbour('0', 0, 0), '0');
+      assert.equal(quadtree.neighbour('0', 0, 1), '1');
+      assert.equal(quadtree.neighbour('0', -1, 0), '2');
+      assert.equal(quadtree.neighbour('0', -1, 1), '3');
+    });
+
+    it('should return expected for given quadtree precision 1 and quadrant 1', function(){
+      assert.equal(quadtree.neighbour('1', 0, -1), '0');
+      assert.equal(quadtree.neighbour('1', 0, 0), '1');
+      assert.equal(quadtree.neighbour('1', -1, -1), '2');
+      assert.equal(quadtree.neighbour('1', -1, 0), '3');
+    });
+  });
 });
