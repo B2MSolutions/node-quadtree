@@ -18,23 +18,30 @@ The encoding algorithm orders the tiles using the [bing maps ordering](http://ms
 	};
 
 	var precision = 8;
-	var encoded = quadtree.encode(coordinate, precision);
+	var encoded = quadtree.encode(coordinate, precision); // returns "23323322"
 
-	var decoded = quadtree.decode(encoded);
+	var decoded = quadtree.decode(encoded); // returns { origin: { lng: -27.421875, lat: -89.6484375 }, error: { lng: 0.703125, lat: 0.3515625 } }
 
-	var boundingBox = quadtree.bbox(decoded.origin);
+	var neighbour = quadtree.neighbour(encoded, 1, 1); // returns "23323321"
+
+	var boundingBox = quadtree.bbox(encoded); // returns { minlng:-28.125, minlat: -90, maxlng: -26.71875, maxlat: -89.296875 }
+
+	var enveloped = quadtree.envelop(boundingBox, precision); // returns ["23323322", "23323323", "23323320", "23323321"]
 
 ### quadtree.encode(coordinate, precision)
-Encodes a coordinate of the form _{ lng: -27.093364, lat: -109.367523 }_ into a quadtree of the specified precision.
+Encodes a coordinate into a quadtree of the specified precision.
 
 ### quadtree.decode(quadtree)
-Decodes a quadtree of the form _'01122332'_ into an object of the form _{ origin: { lng: -27.093364, lat: -109.367523 }, error: { lng: 0.343, lat: 0.444 }}_.
+Decodes a quadtree into an origin and error.
 
 ### quadtree.neighbour(encoded, north, east)
-Finds the neighbour of the given quadtree, walking a number of tiles in the supplied direction. Use -1 to walk south or west one tile.
+Finds the neighbour of the given quadtree, walking a number of tiles in the supplied direction.
 
 ### quadtree.bbox(encoded)
-Returns the bounding box of the tile containing the supplied quadtree. The bounding box is returned in the following form: _{ minlng: -27.093364, minlat: -109.367523, maxlng: -27.093365, maxlat: -109.367525 }_
+Returns the bounding box of the tile containing the supplied quadtree.
+
+### quadtree.envelop(bbox, precision)
+Returns an array of quadtrees that envelop the bbox at the supplied precision.
 
 ## Contributors
 Pair programmed by [Roy Lines](http://roylines.co.uk) and [James Bloomer](https://github.com/jamesbloomer).
