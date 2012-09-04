@@ -1,4 +1,5 @@
 # node-quadtree
+[![Build Status](https://secure.travis-ci.org/B2MSolutions/node-quadtree.png)](http://travis-ci.org/B2MSolutions/node-quadtree)
 ## Description
 Quadtree is a node module that encodes and decodes geospatial [quadtrees](http://en.wikipedia.org/wiki/Quadtree).
 
