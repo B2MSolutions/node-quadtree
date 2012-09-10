@@ -73,19 +73,16 @@ describe('quadtree', function(){
   });
 
   describe('#envelop()', function(){
-    // it('should return expected for given quadtree precision 12', function(){
-    //   assert.deepEqual(quadtree.neighbour('1310333011320', 0, 1), '1310333011321');
-    // });
-    // it('should return expected for given quadtree precision 1 and quadrant 0', function(){
-    //   assert.equal(quadtree.neighbour('0', 0, 0), '0');
-    //   assert.equal(quadtree.neighbour('0', 0, 1), '1');
-    //   assert.equal(quadtree.neighbour('0', -1, 0), '2');
-    //   assert.equal(quadtree.neighbour('0', -1, 1), '3');
-    // });
-
     it('should return expected for given bbox precision 1', function() {
-      //assert.equal(JSON.stringify(quadtree.envelop({ minlng: 10, minlat: 10, maxlng: 20, maxlat: 20 }, 1)), JSON.stringify(['1']));
       assert.equal(JSON.stringify(quadtree.envelop({ minlng: -10, minlat: -10, maxlng: 20, maxlat: 20 }, 1)), JSON.stringify(['2','3','0','1']));
+    });
+
+    it('should return expected for given bbox precision 3', function() {
+      var bbox = quadtree.bbox(quadtree.encode({lng: 0,lat: 0}, 3));
+      var end = quadtree.encode({ lng: bbox.maxlng, lat: bbox.maxlat }, 3);
+      var start = quadtree.encode({ lng: bbox.minlng, lat: bbox.minlat }, 3);
+      var envelop = quadtree.envelop(bbox,3);
+      assert.deepEqual([ '122', '123', '120', '121' ], envelop);
     });
   });
 
@@ -112,6 +109,28 @@ describe('quadtree', function(){
       assert.equal(neighbour, '23323321');
       assert.deepEqual(boundingBox, { minlng:-28.125, minlat: -90, maxlng: -26.71875, maxlat: -89.296875 });
       assert.equal(JSON.stringify(enveloped), '["23323322","23323323","23323320","23323321"]');
+    });
+  });
+
+  describe('issues', function() {
+    it('bbox should enclose original coordinate', function() {
+      var coords = {lng: -27.093364, lat: -109.367523};
+      var encoded = quadtree.encode(coords, 20);
+      var bbox = quadtree.bbox(encoded);
+      assert(bbox.minlng <= coords.lng);
+      assert(bbox.minlat <= coords.lat);
+      assert(bbox.maxlng >= coords.lng);
+      assert(bbox.maxlat >= coords.lat);
+    });
+
+    it('encode then decode should return coordinates within error of the original point', function() {
+      var coords = {lng: -27.093364, lat: -109.367523};
+      var encoded = quadtree.encode(coords, 20);
+      var decoded = quadtree.decode(encoded);
+      assert(decoded.origin.lat - decoded.error.lat <= coords.lat);
+      assert(decoded.origin.lat + decoded.error.lat >= coords.lat);
+      assert(decoded.origin.lng - decoded.error.lng <= coords.lng);
+      assert(decoded.origin.lng + decoded.error.lng >= coords.lng);
     });
   });
 });
