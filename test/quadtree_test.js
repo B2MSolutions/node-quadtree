@@ -114,7 +114,7 @@ describe('quadtree', function(){
 
   describe('issues', function() {
     it('bbox should enclose original coordinate', function() {
-      var coords = {lng: -27.093364, lat: -109.367523};
+      var coords = {lat: -27.093364, lng: -109.367523};
       var encoded = quadtree.encode(coords, 20);
       var bbox = quadtree.bbox(encoded);
       assert(bbox.minlng <= coords.lng);
@@ -124,7 +124,7 @@ describe('quadtree', function(){
     });
 
     it('encode then decode should return coordinates within error of the original point', function() {
-      var coords = {lng: -27.093364, lat: -109.367523};
+      var coords = {lat: -27.093364, lng: -109.367523};
       var encoded = quadtree.encode(coords, 20);
       var decoded = quadtree.decode(encoded);
       assert(decoded.origin.lat - decoded.error.lat <= coords.lat);
