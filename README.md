@@ -42,7 +42,7 @@ Finds the neighbour of the given quadtree, walking a number of tiles in the supp
 Returns the bounding box of the tile containing the supplied quadtree.
 
 ### quadtree.envelop(bbox, precision)
-Returns an array of quadtrees that envelop the bbox at the supplied precision.
+Returns an array of quadtrees that are enveloped by the bbox at the supplied precision.
 
 ## Contributors
 Pair programmed by [Roy Lines](http://roylines.co.uk) and [James Bloomer](https://github.com/jamesbloomer).
