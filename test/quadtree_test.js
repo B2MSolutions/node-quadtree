@@ -89,26 +89,26 @@ describe('quadtree', function(){
   describe('examples', function() {
     it('should return values described in the README', function() {
       var coordinate = {
-          lng: -27.093364,
-          lat: -109.367523
+          lat: -27.093364,
+          lng: -109.367523
       };
 
       var precision = 8;
-      var encoded = quadtree.encode(coordinate, precision); // returns "23323322"
+      var encoded = quadtree.encode(coordinate, precision); // returns "20310230")
 
-      var decoded = quadtree.decode(encoded); // returns { origin: { lng: -27.421875, lat: -89.6484375 }, error: { lng: 0.703125, lat: 0.3515625 } }
+      var decoded = quadtree.decode(encoded); // returns { origin: { lng: -108.984375, lat: -27.0703125 }, error: { lng: 0.703125, lat: 0.3515625 } }
 
-      var neighbour = quadtree.neighbour(encoded, 1, 1); // returns "23323321"
+      var neighbour = quadtree.neighbour(encoded, 1, 1); // returns "20310213"
 
-      var boundingBox = quadtree.bbox(encoded); // returns { minlng:-28.125, minlat: -90, maxlng: -26.71875, maxlat: -89.296875 }
+      var boundingBox = quadtree.bbox(encoded); // returns { minlng: -109.6875, minlat: -27.421875, maxlng: -108.28125, maxlat: -26.71875 }
 
-      var enveloped = quadtree.envelop(boundingBox, precision); // returns ["23323322", "23323323", "23323320", "23323321"]
+      var enveloped = quadtree.envelop(boundingBox, precision); // returns [ '20310230', '20310231', '20310212', '20310213' ]
 
-      assert.equal(encoded, '23323322');
-      assert.deepEqual(decoded, { origin: { lng: -27.421875, lat: -89.6484375 }, error: { lng: 0.703125, lat: 0.3515625 } });
-      assert.equal(neighbour, '23323321');
-      assert.deepEqual(boundingBox, { minlng:-28.125, minlat: -90, maxlng: -26.71875, maxlat: -89.296875 });
-      assert.equal(JSON.stringify(enveloped), '["23323322","23323323","23323320","23323321"]');
+      assert.equal(encoded, '20310230');
+      assert.deepEqual(decoded, { origin: { lng: -108.984375, lat: -27.0703125 }, error: { lng: 0.703125, lat: 0.3515625 } });
+      assert.equal(neighbour, '20310213');
+      assert.deepEqual(boundingBox, { minlng: -109.6875, minlat: -27.421875, maxlng: -108.28125, maxlat: -26.71875 });
+      assert.equal(JSON.stringify(enveloped), '["20310230","20310231","20310212","20310213"]');
     });
   });
 

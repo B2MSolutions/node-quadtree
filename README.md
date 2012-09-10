@@ -13,21 +13,21 @@ The encoding algorithm orders the tiles using the [bing maps ordering](http://ms
 ## Usage
 	var quadtree = require('quadtree');
 
-	var coordinate = {
-		lng: -27.093364,
-		lat: -109.367523
-	};
+		var coordinate = {
+		    lat: -27.093364,
+		    lng: -109.367523
+		};
 
-	var precision = 8;
-	var encoded = quadtree.encode(coordinate, precision); // returns "23323322"
+		var precision = 8;
+		var encoded = quadtree.encode(coordinate, precision); // returns "20310230")
 
-	var decoded = quadtree.decode(encoded); // returns { origin: { lng: -27.421875, lat: -89.6484375 }, error: { lng: 0.703125, lat: 0.3515625 } }
+		var decoded = quadtree.decode(encoded); // returns { origin: { lng: -108.984375, lat: -27.0703125 }, error: { lng: 0.703125, lat: 0.3515625 } }
 
-	var neighbour = quadtree.neighbour(encoded, 1, 1); // returns "23323321"
+		var neighbour = quadtree.neighbour(encoded, 1, 1); // returns "20310213"
 
-	var boundingBox = quadtree.bbox(encoded); // returns { minlng:-28.125, minlat: -90, maxlng: -26.71875, maxlat: -89.296875 }
+		var boundingBox = quadtree.bbox(encoded); // returns { minlng: -109.6875, minlat: -27.421875, maxlng: -108.28125, maxlat: -26.71875 }
 
-	var enveloped = quadtree.envelop(boundingBox, precision); // returns ["23323322", "23323323", "23323320", "23323321"]
+		var enveloped = quadtree.envelop(boundingBox, precision); // returns [ '20310230', '20310231', '20310212', '20310213' ]
 
 ### quadtree.encode(coordinate, precision)
 Encodes a coordinate into a quadtree of the specified precision.
